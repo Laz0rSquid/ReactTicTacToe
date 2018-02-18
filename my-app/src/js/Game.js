@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Board from './Board.js';
-import './index.css';
+import '../css/index.css';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -9,11 +8,12 @@ export default class Game extends React.Component {
     this.state = {
       history: [
         {
-          squares: Array(9).fill(null)
+          squares: Array(9).fill(null),
+          position: null
         }
       ],
       stepNumber: 0,
-      xIsNext: true
+      xIsNext: true,
     };
   }
 
@@ -28,11 +28,12 @@ export default class Game extends React.Component {
     this.setState({
       history: history.concat([
         {
-          squares: squares
+          squares: squares,
+          position: i
         }
       ]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext
+      xIsNext: !this.state.xIsNext,
     });
   }
 
@@ -47,10 +48,11 @@ export default class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
+    const draw = current.squares.every(checkForDraw);
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        'Go to move #' + move + ' @ ' + getPostionString(step.position) :
         'Go to game start';
       return (
         <li key={move}>
@@ -60,7 +62,9 @@ export default class Game extends React.Component {
     });
 
     let status;
-    if (winner) {
+    if (draw) {
+      status = "It's a draw"
+    } else if (winner) {
       status = "Winner: " + winner;
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
@@ -83,6 +87,10 @@ export default class Game extends React.Component {
   }
 }
 
+function checkForDraw(square) {
+  return square ? true : false;
+}
+
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],
@@ -102,3 +110,19 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
+function getPostionString(position) {
+  var col, row;
+  var counter = -1;
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      counter++;
+      if (counter == position) {
+        return 'col ' + (++j) + ', row ' + (++i);
+      }
+    }
+  }
+
+  return null;
+}
+

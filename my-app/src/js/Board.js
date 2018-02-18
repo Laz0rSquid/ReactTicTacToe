@@ -1,14 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import '../css/index.css';
 
-function Square(props) {
-  return (
-    <button className="square" onClick={props.onClick}>
-      {props.value}
-    </button>
-  );
-}
 
 export default class Board extends React.Component {
   renderSquare(i) {
@@ -41,4 +33,12 @@ export default class Board extends React.Component {
       </div>
     );
   }
+}
+
+function Square(props) {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
