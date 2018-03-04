@@ -7,12 +7,22 @@ export default class Board extends React.Component {
     return (
       <Square
         value={this.props.squares[i]}
-        onClick={() => this.props.onClick(i)}
-      />
+        onClick={() => this.props.onClick(i)}/>
     );
   }
 
   render() {
+    
+    var gridIds = Array.from(Array(9).keys());
+    
+    return (
+      <div>
+        <div className="board-row">
+          {gridIds.map( (id) => {return this.renderSquare(id);})}
+        </div>
+      </div>
+    );
+    /*
     return (
       <div>
         <div className="board-row">
@@ -32,6 +42,7 @@ export default class Board extends React.Component {
         </div>
       </div>
     );
+    */
   }
 }
 
