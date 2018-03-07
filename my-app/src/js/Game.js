@@ -66,10 +66,12 @@ export default class Game extends React.Component {
     if (draw) {
       status = "It's a draw"
     } else if (winner) {
-      status = "Winner: " + winner;
+      status = "Winner: " + winner[0];
+      winner[1].map( (key) => document.getElementsByClassName('square')[key].className += ' winning-move')
       gameEndColorChange += " winner"
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      Array.from(document.getElementsByClassName('square')).forEach(function(element) {element.className = 'square';});
     }
 
     return (
@@ -107,19 +109,18 @@ function calculateWinner(squares) {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return [squares[a], lines[i]];
     }
   }
   return null;
 }
 
 function getPostionString(position) {
-  var col, row;
   var counter = -1;
   for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 3; j++) {
       counter++;
-      if (counter == position) {
+      if (counter === position) {
         return 'col ' + (++j) + ', row ' + (++i);
       }
     }
