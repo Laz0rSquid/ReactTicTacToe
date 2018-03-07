@@ -14,7 +14,7 @@ export default class Board extends React.Component {
   render() {
     var boardDiv = [];
     var buttonKey = 0;
-    console.time('Dauer');
+    //console.time('Dauer');
     for (var i = 0; i < 3; i++) {
       var squares = new Array(3);
       for (var j = 0; j < 3; j++) {
@@ -22,7 +22,7 @@ export default class Board extends React.Component {
       }
       boardDiv.push(<div className="board-row">{squares}</div>);
     }
-    console.timeEnd('Dauer')
+    //console.timeEnd('Dauer');
     return (
       <div>
         {boardDiv}
