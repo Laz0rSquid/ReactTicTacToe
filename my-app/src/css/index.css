@@ -1,10 +1,37 @@
-body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+* {
+  box-sizing: border-box;
 }
 
-ol, ul {
-  padding-left: 30px;
+body {
+  background-color: #1b6aa5;
+  font: 14px "Century Gothic", Futura, sans-serif;
+  color: #ffffff;
+  margin: 0px;
+  padding: 0px;
+}
+
+.game {
+  width: 320px;
+  margin: auto;
+  position: relative;
+  text-align: center;
+}
+
+.game-message {
+  display: inline-block;
+  text-align: center;
+  padding: 30px 0;
+  font-size: 26px;
+}
+
+.winner {
+  font-weight: bold;
+}
+
+.game-board {
+  display: inline-block;
+  margin: auto;
+  border: 4px solid #ffffff;
 }
 
 .board-row:after {
@@ -13,23 +40,20 @@ ol, ul {
   display: table;
 }
 
-.status {
-  margin-bottom: 10px;
-}
-
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background: #1b6aa5;
+  border: 4px solid #ffffff;
   float: left;
-  font-size: 24px;
+  font-size: 44px;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  line-height: 44px;
+  height: 80px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 80px;
+  color: #ffffff;
 }
 
 .square:focus {
@@ -44,16 +68,18 @@ ol, ul {
   background: #ddd;
 }
 
-.game {
-  display: flex;
-  flex-direction: row;
+.menu-button-row {
+
+}
+
+.menu-button-row button {
+  background-color: #1b6aa5;
+  font-size: 50px;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
 }
 
 .game-info {
-  margin-left: 20px;
-}
-
-.winner {
-  color: #ff00ff;
-  font-size: 18px;
+  min-height: 30px;
 }
