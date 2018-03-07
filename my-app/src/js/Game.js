@@ -67,12 +67,12 @@ export default class Game extends React.Component {
     });
 
     let status;
-    if (draw) {
-      status = "It's a draw"
-    } else if (winner) {
+    if (winner) {
       status = "Winner: " + winner[0];
       winner[1].map( (key) => document.getElementsByClassName('square')[key].className += ' winning-move')
       gameMessage += " winner"
+    } else if (draw) {
+      status = "It's a draw"
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
       Array.from(document.getElementsByClassName('square')).forEach(function(element) {element.className = 'square';});
