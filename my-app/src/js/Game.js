@@ -49,6 +49,7 @@ export default class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const draw = current.squares.every(checkForDraw);
+    var gameEndColorChange = "";
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -66,6 +67,7 @@ export default class Game extends React.Component {
       status = "It's a draw"
     } else if (winner) {
       status = "Winner: " + winner;
+      gameEndColorChange += " winner"
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
@@ -79,7 +81,7 @@ export default class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-          <div>{status}</div>
+          <div className={gameEndColorChange}>{status}</div>
           <ol>{moves}</ol>
         </div>
       </div>
