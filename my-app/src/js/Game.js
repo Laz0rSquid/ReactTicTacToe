@@ -1,6 +1,10 @@
 import React from 'react';
 import Board from './Board.js';
 import '../css/index.css';
+import TiArrowBack from 'react-icons/lib/ti/arrow-back';
+import TiArrowForward from 'react-icons/lib/ti/arrow-forward';
+import TiRefresh from 'react-icons/lib/ti/refresh';
+
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -49,7 +53,7 @@ export default class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const draw = current.squares.every(checkForDraw);
-    var gameEndColorChange = "";
+    var gameMessage = "game-message";
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -68,7 +72,7 @@ export default class Game extends React.Component {
     } else if (winner) {
       status = "Winner: " + winner[0];
       winner[1].map( (key) => document.getElementsByClassName('square')[key].className += ' winning-move')
-      gameEndColorChange += " winner"
+      gameMessage += " winner"
     } else {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
       Array.from(document.getElementsByClassName('square')).forEach(function(element) {element.className = 'square';});
@@ -76,15 +80,17 @@ export default class Game extends React.Component {
 
     return (
       <div className="game">
+        <div className={gameMessage}>{status}</div>
         <div className="game-board">
           <Board
             squares={current.squares}
             onClick={i => this.handleClick(i)}
           />
         </div>
-        <div className="game-info">
-          <div className={gameEndColorChange}>{status}</div>
-          <ol>{moves}</ol>
+        <div className="menu-button-row">
+          <button id="history-back-button"><TiArrowBack /></button>
+          <button id="history-forward-button"><TiArrowForward /></button>
+          <button id="reset-game-button"><TiRefresh /></button>
         </div>
       </div>
     );
