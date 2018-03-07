@@ -12,24 +12,17 @@ export default class Board extends React.Component {
   }
 
   render() {
-    /*
-    return (
-      <div>
-        <div className="board-row">
-          {gridIds.map( (id) => {return this.renderSquare(id);})}
-        </div>
-      </div>
-    );
-    */
-    var buttonKeys = Array.from(Array(9).keys());
-    var buttonArray = 
-      buttonKeys.map( (key) => {return this.renderSquare(key);}).reduce(function (rows, key, index) {
-        return (index % 3 == 0 ? rows.push([key]) : rows[rows.length-1].push(key)) && rows;
-      } , []);
     var boardDiv = [];
+    var buttonKey = 0;
+    console.time('Dauer');
     for (var i = 0; i < 3; i++) {
-      boardDiv.push(<div className="board-row">{buttonArray[i]}</div>);
+      var squares = new Array(3);
+      for (var j = 0; j < 3; j++) {
+        squares[j] = this.renderSquare(buttonKey++);
+      }
+      boardDiv.push(<div className="board-row">{squares}</div>);
     }
+    console.timeEnd('Dauer')
     return (
       <div>
         {boardDiv}
