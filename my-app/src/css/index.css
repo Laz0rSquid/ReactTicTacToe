@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 
+
 body {
   background-color: #1b6aa5;
-  font: 14px "Century Gothic", Futura, sans-serif;
   color: #ffffff;
   margin: 0px;
   padding: 0px;
@@ -18,10 +18,10 @@ body {
 }
 
 .game-message {
+  font-size: 26px;
   display: inline-block;
   text-align: center;
   padding: 30px 0;
-  font-size: 26px;
 }
 
 .winner {
