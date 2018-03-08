@@ -1,6 +1,4 @@
 import React from 'react';
-import '../css/index.css';
-
 
 export default class Board extends React.Component {
   renderSquare(i) {

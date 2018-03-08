@@ -1,10 +1,8 @@
 import React from 'react';
 import Board from './Board.js';
-import '../css/index.css';
 import TiArrowBack from 'react-icons/lib/ti/arrow-back';
 import TiArrowForward from 'react-icons/lib/ti/arrow-forward';
 import TiRefresh from 'react-icons/lib/ti/refresh';
-
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -17,7 +15,7 @@ export default class Game extends React.Component {
         }
       ],
       stepNumber: 0,
-      xIsNext: true,
+      xIsNext: Math.random() < 0.5,
     };
   }
 
@@ -41,11 +39,35 @@ export default class Game extends React.Component {
     });
   }
 
-  jumpTo(step) {
+  goBack() {
+    if (this.state.stepNumber > 0) {
+      this.setState({
+        stepNumber: this.state.stepNumber -1,
+        xIsNext: (this.state.stepNumber % 2) === 0
+      });
+    }
+  }
+
+  goForward() {
+    if (this.state.stepNumber < this.state.history.length -1 && this.state.stepNumber < 9) {
+      this.setState({
+        stepNumber: this.state.stepNumber +1,
+        xIsNext: (this.state.stepNumber % 2) === 0
+      });
+    }
+  }
+
+  resetGame() {
     this.setState({
-      stepNumber: step,
-      xIsNext: (step % 2) === 0
-    });
+      history: [
+        {
+          squares: Array(9).fill(null),
+          position: null
+        }
+      ],
+      stepNumber: 0,
+      xIsNext: Math.random() < 0.5,
+    })
   }
 
   render() {
@@ -74,7 +96,7 @@ export default class Game extends React.Component {
     } else if (draw) {
       status = "It's a draw"
     } else {
-      status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+      status = "Next player : " + (this.state.xIsNext ? "X" : "O");
       Array.from(document.getElementsByClassName('square')).forEach(function(element) {element.className = 'square';});
     }
 
@@ -88,9 +110,9 @@ export default class Game extends React.Component {
           />
         </div>
         <div className="menu-button-row">
-          <button id="history-back-button"><TiArrowBack /></button>
-          <button id="history-forward-button"><TiArrowForward /></button>
-          <button id="reset-game-button"><TiRefresh /></button>
+          <button id="history-back-button" onClick={() => this.goBack()}><TiArrowBack /></button>
+          <button id="history-forward-button" onClick={() => this.goForward()}><TiArrowForward /></button>
+          <button id="reset-game-button" onClick={() => this.resetGame()}><TiRefresh /></button>
         </div>
       </div>
     );
